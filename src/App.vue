@@ -7,6 +7,7 @@ import gmapsInit from './utils/gmaps'
 import firebase from 'firebase'
 
 export default {
+  /* eslint-disable */
   name: 'App',
   data () {
     return {
@@ -23,11 +24,11 @@ export default {
           position:
             {
               lat: parseFloat(spidersInfo[property].SpiderLat),
-              lng: parseFloat(spidersInfo[property].SpiderLng),
+              lng: parseFloat(spidersInfo[property].SpiderLng)
             }
         })
         this.names.push({
-          name: spidersInfo[property].SpiderName,
+          name: spidersInfo[property].SpiderName
         })
       }
     }
@@ -36,47 +37,30 @@ export default {
   watch: {
     locations: function (val, oldVal) {
       var map = this.map
-      var myurl = null
-      for (var i=0;i<this.locations.length;i++)
-            {
-
-            if(this.names[i].name === 'Funnel web spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-            }
-            else if(this.names[i].name === 'Garden Orb Weaver Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-            }
-            else if(this.names[i].name === 'Redback Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
-            }
-            else if(this.names[i].name === 'Tarantula Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
-            }
-            else if(this.names[i].name === 'White-Tailed Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
-            }
-            else if(this.names[i].name === 'Daddy Long Legs Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/white-dot.png"
-            }
-            else if(this.names[i].name === 'Huntsman Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/black-dot.png"
-            }
-            else if(this.names[i].name === 'Red Headed Mouse Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
-            }
-            else if(this.names[i].name === 'St Andrew\'s Cross Spider'){
-                var myurl = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
-            }
-                var marker = new google.maps.Marker({
-                position: this.locations[i].position,
-                map: map,
-                title: this.names[i].name,
-                icon: {
-                     url: myurl
-                    }
-                });
-        }
-
+      const urlPrefix = 'http://maps.google.com/mapfiles/ms/icons/'
+      const urlSuffix = '-dot.png'
+      const nameToUrl = {
+        'Funnel web spider': 'blue',
+        'Garden Orb Weaver Spider': 'green',
+        'Redback Spider': 'pink',
+        'Tarantula Spider': 'yellow',
+        'White-Tailed Spider': 'purple',
+        'Daddy Long Legs Spider': 'white',
+        'Huntsman Spider': 'black',
+        'Red Headed Mouse Spider': 'red',
+        'St Andrew\'s Cross Spider': 'orange'
+      }
+      for (var i = 0; i < this.locations.length; i++) {
+        var url = urlPrefix + nameToUrl[this.names[i].name] + urlSuffix
+        var marker = new google.maps.Marker({
+          position: this.locations[i].position,
+          map: map,
+          title: this.names[i].name,
+          icon: {
+            url: url
+          }
+        })
+      }
     }
   },
 

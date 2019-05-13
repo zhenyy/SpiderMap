@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.3ececd9c6c410390491506b7b7fb979f.css"],"names":[],"mappings":"AACA,UAEE,SAAU,AACV,SAAW,CACZ,AACD,KACE,YAAa,AACb,YAAc,CACf","file":"app.3ececd9c6c410390491506b7b7fb979f.css","sourcesContent":["\nhtml,\nbody {\n  margin: 0;\n  padding: 0;\n}\n.App {\n  width: 100vw;\n  height: 100vh;\n}\n"]}
