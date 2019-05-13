@@ -65,6 +65,7 @@ export default {
         google.maps.event.addListener(marker, 'click', (function(marker, infoWindow) {
           return function() {
             infoWindow.open(map, marker);
+            console.log('marker selected')
           }
         })(marker, infoWindow));
       }
