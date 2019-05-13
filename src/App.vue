@@ -37,7 +37,7 @@ export default {
   watch: {
     locations: function (val, oldVal) {
       var map = this.map
-      const urlPrefix = 'http://maps.google.com/mapfiles/ms/icons/'
+      const urlPrefix = 'https://maps.google.com/mapfiles/ms/icons/'
       const urlSuffix = '-dot.png'
       const nameToUrl = {
         'Funnel web spider': 'blue',
