@@ -55,11 +55,18 @@ export default {
         var marker = new google.maps.Marker({
           position: this.locations[i].position,
           map: map,
-          title: this.names[i].name,
           icon: {
             url: url
           }
         })
+        var infoWindow = new google.maps.InfoWindow({
+          content: this.names[i].name
+        });
+        google.maps.event.addListener(marker, 'click', (function(marker, infoWindow) {
+          return function() {
+            infoWindow.open(map, marker);
+          }
+        })(marker, infoWindow));
       }
     }
   },
