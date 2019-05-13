@@ -10,14 +10,8 @@ export default {
   name: 'App',
   data () {
     return {
-      locations: [
-        {
-          position: {
-            lat: -25.363882,
-            lng: 131.044922,
-          }
-        }
-      ],
+      locations: [],
+      names: [],
       map: null
     }
   },
@@ -32,6 +26,9 @@ export default {
               lng: parseFloat(spidersInfo[property].SpiderLng),
             }
         })
+        this.names.push({
+          name: spidersInfo[property].SpiderName,
+        })
       }
     }
   },
@@ -39,7 +36,47 @@ export default {
   watch: {
     locations: function (val, oldVal) {
       var map = this.map
-      var markers = this.locations.map(x => new google.maps.Marker({...x, map, title: 'hello'}))
+      var myurl = null
+      for (var i=0;i<this.locations.length;i++)
+            {
+
+            if(this.names[i].name === 'Funnel web spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            }
+            else if(this.names[i].name === 'Garden Orb Weaver Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+            }
+            else if(this.names[i].name === 'Redback Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
+            }
+            else if(this.names[i].name === 'Tarantula Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+            }
+            else if(this.names[i].name === 'White-Tailed Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
+            }
+            else if(this.names[i].name === 'Daddy Long Legs Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/white-dot.png"
+            }
+            else if(this.names[i].name === 'Huntsman Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/black-dot.png"
+            }
+            else if(this.names[i].name === 'Red Headed Mouse Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+            }
+            else if(this.names[i].name === 'St Andrew\'s Cross Spider'){
+                var myurl = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
+            }
+                var marker = new google.maps.Marker({
+                position: this.locations[i].position,
+                map: map,
+                title: this.names[i].name,
+                icon: {
+                     url: myurl
+                    }
+                });
+        }
+
     }
   },
 
