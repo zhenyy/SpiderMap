@@ -5,6 +5,7 @@
 <script>
 import gmapsInit from './utils/gmaps'
 import firebase from 'firebase'
+import global from './assets/Global'
 
 export default {
   /* eslint-disable */
@@ -37,21 +38,8 @@ export default {
   watch: {
     locations: function (val, oldVal) {
       var map = this.map
-      const urlPrefix = 'https://maps.google.com/mapfiles/ms/icons/'
-      const urlSuffix = '-dot.png'
-      const nameToUrl = {
-        'Funnel web spider': 'blue',
-        'Garden Orb Weaver Spider': 'green',
-        'Redback Spider': 'pink',
-        'Tarantula Spider': 'yellow',
-        'White-Tailed Spider': 'purple',
-        'Daddy Long Legs Spider': 'white',
-        'Huntsman Spider': 'black',
-        'Red Headed Mouse Spider': 'red',
-        'St Andrew\'s Cross Spider': 'orange'
-      }
       for (var i = 0; i < this.locations.length; i++) {
-        var url = urlPrefix + nameToUrl[this.names[i].name] + urlSuffix
+        var url = global.spiderType[this.names[i].name].url
         var marker = new google.maps.Marker({
           position: this.locations[i].position,
           map: map,
@@ -60,12 +48,11 @@ export default {
           }
         })
         var infoWindow = new google.maps.InfoWindow({
-          content: this.names[i].name
+          content: global.spiderType[this.names[i].name].poisonLvl + ' ' + this.names[i].name
         });
         google.maps.event.addListener(marker, 'click', (function(marker, infoWindow) {
           return function() {
             infoWindow.open(map, marker);
-            console.log('marker selected')
           }
         })(marker, infoWindow));
       }
@@ -100,8 +87,6 @@ export default {
   }
 
 }
-
-// To add the marker to the map, call setMap();
 
 </script>
 
