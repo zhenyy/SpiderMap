@@ -48,7 +48,7 @@ export default {
           }
         })
         var infoWindow = new google.maps.InfoWindow({
-          content: global.spiderType[this.names[i].name].poisonLvl + ' ' + this.names[i].name
+          content: this.names[i].name + ': ' + global.spiderType[this.names[i].name].poisonLvl
         });
         google.maps.event.addListener(marker, 'click', (function(marker, infoWindow) {
           return function() {
