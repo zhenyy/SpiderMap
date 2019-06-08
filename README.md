@@ -1,7 +1,7 @@
 # spidermap
 
-> a website showing location of spiders
-> The demo is deployed at the GitHub Pages, find out more at https://zhenyy.github.io/SpiderMap/#/
+A website showing location of spiders
+The demo is deployed at the GitHub Pages, find out more at https://zhenyy.github.io/SpiderMap/#/
 
 ## Build Setup
 
