@@ -1,6 +1,7 @@
 /* eslint-disable */
-// src/utils/gmaps.js
-
+/**
+ * Google Maps API Configuration
+ */
 // Your personal API key.
 // Get it here: https://console.cloud.google.com/google/maps-apis
 const API_KEY = 'AIzaSyAVES9cLOzyLcMkOM2UsdlHuLhs2gcLhEI'

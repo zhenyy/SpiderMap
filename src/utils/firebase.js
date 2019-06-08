@@ -1,6 +1,6 @@
 /* eslint-disable */
 /**
- * Firebase Database
+ * Firebase Database Configuration
  */
 import firebase from 'firebase/app';
 import 'firebase/auth';

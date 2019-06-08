@@ -1,4 +1,8 @@
 <script>
+/**
+ * Stores all static information as global objects here
+ * spiderType is an object with a structure {spider name 1: {url: url of icon image, poisonLvl: poisonousness level}, ...}
+ */
 const spiderType = {
   'Funnel-Web Spider': {url: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png', poisonLvl: 'Deadly & Dangerous'},
   'Garden Orb Weaver Spider': {url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png', poisonLvl: 'Low Risk'},

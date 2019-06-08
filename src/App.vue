@@ -10,6 +10,11 @@ import global from './assets/Global'
 export default {
   /* eslint-disable */
   name: 'App',
+  /**
+   * locations: an array of objects storing data of latitude and longitude
+   * names: an array storing names of spiders
+   * map: the google map object
+   */
   data () {
     return {
       locations: [],
@@ -19,6 +24,10 @@ export default {
   },
 
   methods: {
+    /**
+     * Once receive data, rebuild the data structure
+     * and store them in names and locations respectively
+     */
     storeSpidersInfo (spidersInfo) {
       for (var property in spidersInfo) {
         this.locations.push({
@@ -36,6 +45,11 @@ export default {
   },
 
   watch: {
+    /**
+     * Listen if this.locations is changed
+     * If changed, that means we received data from Firebase
+     * Then we add marks on the map, with icons and infoWindows
+     */
     locations: function (val, oldVal) {
       var map = this.map
       for (var i = 0; i < this.locations.length; i++) {
@@ -44,9 +58,13 @@ export default {
           position: this.locations[i].position,
           map: map,
           icon: {
-            url: url
+            url: url // the url for icon image
           }
         })
+        /**
+         * Each content follows the structure " Funnel-Web Spider:  Deadly & Dangerous "
+         * Then each infoWindow is attached to relative marker, triggered by click action
+         */
         var infoWindow = new google.maps.InfoWindow({
           content: this.names[i].name + ': ' + global.spiderType[this.names[i].name].poisonLvl
         });
@@ -60,19 +78,30 @@ export default {
   },
 
   async mounted () {
+    /**
+     * This method is asynchronous since Firebase API is asynchronous
+     * Firebase will override 'this' so we take 'vm' as an alternative
+     */
     var vm = this
     try {
+      // create a reference of firebase
       var ref = firebase.database().ref()
+
+      // retrieve data from firebase
       ref.on('value', function (snapshot) {
+        // when successfully receiving data, call another function to store it
         vm.storeSpidersInfo(snapshot.val().SpiderWithLocation)
       }, function (error) {
+        // print out the error code
         console.log('Error: ' + error.code)
       })
 
+      // create google maps and geocoder
       const google = await gmapsInit()
       const geocoder = new google.maps.Geocoder()
       const map = new google.maps.Map(this.$el)
 
+      // initiate geocoder to show Melbourne as initial location
       geocoder.geocode({address: 'Melbourne, Australia'}, (results, status) => {
         if (status !== 'OK' || !results[0]) {
           throw new Error(status)
@@ -82,7 +111,8 @@ export default {
         vm.map = map
       })
     } catch (error) {
-      console.error(error)
+      // print out the error code
+      console.error('Error: ' + error.code)
     }
   }
 
